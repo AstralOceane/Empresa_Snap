@@ -36,4 +36,4 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` p
 
 ## Agradecimentos
 
-
+- Agradeço se quiser contribuir com melhorias ou idéias ou um estágio onde possa melhorar minhas habilidades :) no mais continuarei treinando realizando exercícios.
