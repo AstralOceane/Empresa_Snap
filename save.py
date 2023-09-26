@@ -1,16 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
-from time import sleep
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import openpyxl
 import os
+import time
 
 # Inicializar o WebDriver do Chrome
 driver = webdriver.Chrome()
 driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
-sleep(15)
 
 # Digita o email
 email = 'seu-email'
@@ -25,7 +25,9 @@ campo_senha.send_keys(senha)
 # Clicar em conectar
 botao_conectar = driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div[2]/div/form/button')
 botao_conectar.click()
-sleep(10)
+
+# Esperar um tempo fixo (sem usar WebDriverWait)
+time.sleep(10)
 
 # Pesquisar o nome da empresa
 excel_file_path = 'dados.xlsx'
@@ -33,23 +35,36 @@ workbook = openpyxl.load_workbook(excel_file_path)
 worksheet = workbook.active
 
 # Ler o nome da empresa da planilha
-nome_empresa = worksheet['A2'].value  # Supondo que o nome da empresa está na célula A1
-campo_pesquisa = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/span/input')
-campo_pesquisa.send_keys(nome_empresa)
-campo_pesquisa.send_keys(Keys.RETURN)
-sleep(10)
+nome_empresa = worksheet['A2'].value  # Supondo que o nome da empresa está na célula A2
+
+if nome_empresa is not None:
+    try:
+        # Esperar até que o campo de pesquisa esteja visível
+        wait = WebDriverWait(driver, 10)
+        campo_pesquisa = wait.until(EC.presence_of_element_located((By.XPATH, 'seu_xpath_aqui')))
+        campo_pesquisa.send_keys(nome_empresa)
+        campo_pesquisa.send_keys(Keys.RETURN)
+    except Exception as e:
+        print(f"Erro ao interagir com o campo de pesquisa: {e}")
+else:
+    print("O valor de nome_empresa é None. Verifique sua planilha de Excel.")
+
+# Esperar um tempo fixo (sem usar WebDriverWait)
+time.sleep(10)
+
+# Restante do seu código...
 
 # Clique no resultado
 resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/div/div/h5')
 resultado.click()
-sleep(10)
+time.sleep(10)
 
 # Pesquisar Palavra Chave
 palavra_chave = worksheet['B2'].value
 campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
 campo_palavra_chave.send_keys(palavra_chave)
 campo_palavra_chave.send_keys(Keys.RETURN)
-sleep(10)
+time.sleep(10)
 
 # Rolar a página para baixo
 driver.execute_script("window.scrollBy(0, 100);")
