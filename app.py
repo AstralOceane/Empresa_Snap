@@ -13,12 +13,12 @@ driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
 
 # Digita o email
-email = 'matheus.novaes998@gmail.com'
+email = 'seu email'
 campo_email = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[1]/input')
 campo_email.send_keys(email)
 
 # Digita a senha
-senha = '321321Asd@'
+senha = 'sua senha'
 campo_senha = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[2]/span/input')
 campo_senha.send_keys(senha)
 
