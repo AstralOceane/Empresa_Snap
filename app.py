@@ -7,18 +7,18 @@ from openpyxl import load_workbook
 import os
 import time
 
-# Inicializar o WebDriver do Chrome
+#Faz com que o codigo rode no Navegador Chrome
 driver = webdriver.Chrome()
 driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
 
 # Digita o email
-email = 'seu-email'
+email = 'matheus.novaes998@gmail.com'
 campo_email = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[1]/input')
 campo_email.send_keys(email)
 
 # Digita a senha
-senha = 'sua-senha'
+senha = '321321Asd@'
 campo_senha = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[2]/span/input')
 campo_senha.send_keys(senha)
 
@@ -36,19 +36,26 @@ for linha in range(2, ultima_linha + 1):
     campo_pesquisa = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/span/input') 
     campo_pesquisa.send_keys(valor)
     campo_pesquisa.send_keys(Keys.RETURN)
-    time.sleep(33000)
+    time.sleep(20)
 
-# Clique no resultado
-#resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/div/div/h5')
-#resultado.click()
-#time.sleep(3000)
+#Clique no resultado
+resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]')
+resultado.click()
+time.sleep(20)        
+
 
 # Pesquisar Palavra Chave
-#palavra_chave = worksheet['B2'].value
-#campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
-#campo_palavra_chave.send_keys(palavra_chave)
-#campo_palavra_chave.send_keys(Keys.RETURN)
-#time.sleep(10)
+palavra_chave = sheet['B2'].value
+campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
+campo_palavra_chave.send_keys(palavra_chave)
+campo_palavra_chave.send_keys(Keys.RETURN)
+time.sleep(30)
+
+#Posição da Empresa
+
+informacao_da_pagina = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/button/div/div/div[1]/div/div').text
+coluna_c = sheet[f'C{linha}']
+coluna_c.value = informacao_da_pagina
 
 # Rolar a página para baixo
 #driver.execute_script("window.scrollBy(0, 100);")
