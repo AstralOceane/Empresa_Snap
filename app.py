@@ -29,7 +29,7 @@ time.sleep(20)
 
 workbook = load_workbook('dados.xlsx')
 sheet = workbook['Plan1']
-ultima_linha = sheet.max_row #Encontre a última linha preenchida na coluna A
+ultima_linha = sheet.max_row # Encontre a última linha preenchida na coluna A
 for linha in range(2, ultima_linha + 1):
     # Ler o valor da célula na coluna A da linha atual
     valor = sheet[f'A{linha}'].value      
@@ -38,23 +38,22 @@ for linha in range(2, ultima_linha + 1):
     campo_pesquisa.send_keys(Keys.RETURN)
     time.sleep(20)
 
-#Clique no resultado
-resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]')
-resultado.click()
-time.sleep(20)        
+    # Clique no resultado
+    resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]')
+    resultado.click()
+    time.sleep(20)        
 
-# Pesquisar Palavra Chave
-palavra_chave = sheet['B2'].value
-campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
-campo_palavra_chave.send_keys(palavra_chave)
-campo_palavra_chave.send_keys(Keys.RETURN)
-time.sleep(333330)
+    # Pesquisar Palavra Chave
+    palavra_chave = sheet[f'B{linha}'].value
+    campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
+    campo_palavra_chave.send_keys(palavra_chave)
+    campo_palavra_chave.send_keys(Keys.RETURN)
+    time.sleep(30)
 
-#Posição da Empresa
-informacao_da_pagina = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/h3[1]').text
-coluna_c = sheet[f'C{linha}']  # Aqui você está definindo a célula correta na coluna C
-coluna_c.value = informacao_da_pagina  # Aqui você está atribuindo o valor à célula
-
+    # Posição da Empresa
+    informacao_da_pagina = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/button/div/div/div[1]/div/div').text
+    coluna_c = sheet[f'C{linha}']  # Defina a célula correta na coluna C para a linha atual
+    coluna_c.value = informacao_da_pagina  # Atribua o valor à célula
 
 # Rolar a página para baixo
 #driver.execute_script("window.scrollBy(0, 100);")
