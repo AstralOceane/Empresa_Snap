@@ -13,12 +13,12 @@ driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
 
 # Digita o email
-email = 'seu email'
+email = 'seu-email'
 campo_email = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[1]/input')
 campo_email.send_keys(email)
 
 # Digita a senha
-senha = 'sua senha'
+senha = 'sua-senha'
 campo_senha = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[2]/span/input')
 campo_senha.send_keys(senha)
 
@@ -43,19 +43,18 @@ resultado = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div
 resultado.click()
 time.sleep(20)        
 
-
 # Pesquisar Palavra Chave
 palavra_chave = sheet['B2'].value
 campo_palavra_chave = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/span/input')
 campo_palavra_chave.send_keys(palavra_chave)
 campo_palavra_chave.send_keys(Keys.RETURN)
-time.sleep(30)
+time.sleep(333330)
 
 #Posição da Empresa
+informacao_da_pagina = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/h3[1]').text
+coluna_c = sheet[f'C{linha}']  # Aqui você está definindo a célula correta na coluna C
+coluna_c.value = informacao_da_pagina  # Aqui você está atribuindo o valor à célula
 
-informacao_da_pagina = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/button/div/div/div[1]/div/div').text
-coluna_c = sheet[f'C{linha}']
-coluna_c.value = informacao_da_pagina
 
 # Rolar a página para baixo
 #driver.execute_script("window.scrollBy(0, 100);")
