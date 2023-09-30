@@ -13,12 +13,12 @@ driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
 
 # Digita o email
-email = 'seu-email'
+email = 'matheus.novaes998@gmail.com'
 campo_email = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[1]/input')
 campo_email.send_keys(email)
 
 # Digita a senha
-senha = 'sua-senha'
+senha = '321321Asd@'
 campo_senha = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[2]/span/input')
 campo_senha.send_keys(senha)
 
@@ -56,7 +56,7 @@ for linha in range(2, ultima_linha + 1):
     coluna_c.value = informacao_da_pagina  # Atribua o valor à célula
 
 # Rolar a página para baixo
-#driver.execute_script("window.scrollBy(0, 100);")
+driver.execute_script("window.scrollBy(0, 100);")
 
 # Tirar um print da página
 #screenshot_path = "screenshot.png"
