@@ -13,12 +13,12 @@ driver.get('https://app.localo.com/paywall')
 driver.set_window_size(1920, 1080)
 
 # Digita o email
-email = 'matheus.novaes998@gmail.com'
+email = 'seu-email'
 campo_email = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[1]/input')
 campo_email.send_keys(email)
 
 # Digita a senha
-senha = '321321Asd@'
+senha = 'sua-senha'
 campo_senha = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[2]/div/form/div[2]/span/input')
 campo_senha.send_keys(senha)
 
@@ -59,8 +59,8 @@ for linha in range(2, ultima_linha + 1):
 driver.execute_script("window.scrollBy(0, 100);")
 
 # Tirar um print da página
-#screenshot_path = "screenshot.png"
-#driver.save_screenshot(screenshot_path)
+screenshot_path = "screenshot.png"
+driver.save_screenshot(screenshot_path)
 
 # Criar uma pasta com o nome da empresa (se não existir)
 #if not os.path.exists(nome_empresa):
