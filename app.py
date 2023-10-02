@@ -63,15 +63,16 @@ screenshot_path = "screenshot.png"
 driver.save_screenshot(screenshot_path)
 
 # Criar uma pasta com o nome da empresa (se não existir)
-#if not os.path.exists(nome_empresa):
-#    os.mkdir(nome_empresa)
+nome_empresa = sheet[A1]
+if not os.path.exists(nome_empresa):
+    os.mkdir(nome_empresa)
 
 # Mover o print para a pasta
-#os.rename(screenshot_path, os.path.join(nome_empresa, screenshot_path))
+os.rename(screenshot_path, os.path.join(nome_empresa, screenshot_path))
 
 # Renomear o print com o nome da empresa
-#nome_arquivo = nome_empresa + ".png"
-#os.rename(os.path.join(nome_empresa, screenshot_path), os.path.join(nome_empresa, nome_arquivo))
+nome_arquivo = nome_empresa + ".png"
+os.rename(os.path.join(nome_empresa, screenshot_path), os.path.join(nome_empresa, nome_arquivo))
 
 # Fechar o navegador
-#driver.quit()
+driver.quit()
